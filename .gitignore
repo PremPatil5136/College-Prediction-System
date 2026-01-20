@@ -1,0 +1,15 @@
+﻿# Large files - exclude from Git
+Utils/ML Project.mp4
+models/college_model.pkl
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+env/
