@@ -14,7 +14,7 @@ AI-Powered College Admission Prediction using Machine Learning
 
 **Watch the complete walkthrough** of the College Prediction System including data preprocessing, model training, web interface, and live predictions.
 
-📹 **Video File:** `Utils/ML Project.mp4`
+📹 **Video File:** `[Utils/ML Project.mp4](https://github.com/PremPatil5136/College-Prediction-System/blob/main/Utils/ML%20Project.mp4)`
 
 ---
 
