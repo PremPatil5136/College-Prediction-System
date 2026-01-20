@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Prediction System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section h2 {
+            color: #2ecc71;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2ecc71;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin: 30px 0;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+        
+        .video-placeholder svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .feature-card h3 {
+            color: #2ecc71;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .stat-box h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-box p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #68d391;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .installation-steps {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .installation-steps ol {
+            margin-left: 20px;
+        }
+        
+        .installation-steps li {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .input-output-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .io-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #2ecc71;
+        }
+        
+        .io-box h3 {
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+        
+        .io-box ul {
+            list-style: none;
+        }
+        
+        .io-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .io-box li:before {
+            content: "✓ ";
+            color: #2ecc71;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .footer h3 {
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .workflow-diagram {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .workflow-step {
+            display: inline-block;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+        }
+        
+        .arrow {
+            display: inline-block;
+            color: #2ecc71;
+            font-size: 2em;
+            margin: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .input-output-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .workflow-step {
+                display: block;
+                margin: 10px 0;
+            }
+            
+            .arrow {
+                display: block;
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🎓 College Prediction System</h1>
+            <p>AI-Powered College Admission Prediction using Machine Learning</p>
+            <div class="badges">
+                <span class="badge">🐍 Python 3.8+</span>
+                <span class="badge">🤖 Machine Learning</span>
+                <span class="badge">🌐 Flask Web App</span>
+                <span class="badge">📊 Random Forest</span>
+                <span class="badge">✨ 95%+ Accuracy</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Video Demo Section -->
+            <div class="section">
+                <h2>📺 Project Demo Video</h2>
+                <div class="video-container">
+                    <!-- Replace with your actual video -->
+                    <video controls poster="thumbnail.jpg">
+                        <source src="./ML Project.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <!-- Video Placeholder (remove when you add real video) -->
+                    <!-- <div class="video-placeholder">
+                        <svg fill="white" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <p>Watch Full Demo Video</p>
+                        <small>Upload your demo video to display here</small>
+                    </div> -->
+                </div>
+                <p style="text-align: center; color: #666; margin-top: 15px;">
+                    <strong>Video Preview:</strong> Complete walkthrough of the College Prediction System - 
+                    Data preprocessing, model training, web interface, and live predictions
+                </p>
+            </div>
+
+            <!-- About Project Section -->
+            <div class="section">
+                <h2>📖 About the Project</h2>
+                <p style="font-size: 1.1em; line-height: 1.8; color: #555;">
+                    The <strong>College Prediction System</strong> is an intelligent machine learning application 
+                    that predicts college admissions based on CAP (Centralized Admission Process) round data. 
+                    Using a Random Forest Classifier trained on 100,000+ records from three CAP rounds, 
+                    the system provides students with the top 5 most probable colleges they can get admission to, 
+                    along with probability percentages.
+                </p>
+            </div>
+
+            <!-- Key Features Section -->
+            <div class="section">
+                <h2>✨ Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>🎯 Smart Predictions</h3>
+                        <p>Get top 5 college recommendations with accurate probability scores based on your profile</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📊 Multi-Round Analysis</h3>
+                        <p>Trained on CAP Round 1, 2, and 3 data for comprehensive predictions</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🌐 Web Interface</h3>
+                        <p>User-friendly Flask-based web application with intuitive design</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ Real-time Results</h3>
+                        <p>Instant predictions processed in milliseconds</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📈 Data Visualization</h3>
+                        <p>Comprehensive EDA with interactive charts and graphs</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔒 High Accuracy</h3>
+                        <p>95%+ test accuracy with optimized Random Forest model</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input/Output Section -->
+            <div class="section">
+                <h2>💻 Input & Output</h2>
+                <div class="input-output-container">
+                    <div class="io-box">
+                        <h3>📥 Input Parameters</h3>
+                        <ul>
+                            <li><strong>Branch:</strong> Engineering branch (Civil, Computer, etc.)</li>
+                            <li><strong>Marks:</strong> Percentile/Score obtained</li>
+                            <li><strong>Caste:</strong> Category (NGOPENH, SC, ST, OBC)</li>
+                            <li><strong>CAP Round:</strong> Round number (1, 2, or 3)</li>
+                            <li><strong>Status:</strong> Government/Private preference</li>
+                        </ul>
+                    </div>
+                    <div class="io-box">
+                        <h3>📤 Output Results</h3>
+                        <ul>
+                            <li>Top 5 predicted colleges</li>
+                            <li>Admission probability percentage</li>
+                            <li>Ranked by likelihood</li>
+                            <li>Confidence scores for each prediction</li>
+                            <li>Instant processing time</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example Section -->
+            <div class="section">
+                <h2>🎓 Example Prediction</h2>
+                <div class="code-block">
+<strong>📝 Input:</strong>
+Branch: Civil Engineering
+Marks: 83.8
+Caste: NGOPENH
+CAP Round: 2
+Status: Government
+
+<strong>🎯 Output - Top 5 Predicted Colleges:</strong>
+
+1. College of Engineering Pune — 87.45%
+2. VJTI Mumbai — 76.32%
+3. COEP Technological University — 65.18%
+4. Walchand College Sangli — 54.27%
+5. Government College Amravati — 48.91%
+                </div>
+            </div>
+
+            <!-- Model Training Process -->
+            <div class="section">
+                <h2>🔬 Model Training Process</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>1️⃣ Data Collection</h3>
+                        <p>Combined 3 CAP rounds with 100,000+ records</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>2️⃣ Data Cleaning</h3>
+                        <p>Handled missing values with interpolation and forward fill</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>3️⃣ Feature Engineering</h3>
+                        <p>Label encoding for categorical variables</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>4️⃣ Model Training</h3>
+                        <p>Random Forest with 80/20 train-test split</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>5️⃣ Evaluation</h3>
+                        <p>Accuracy, MSE, and R² score metrics</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>6️⃣ Deployment</h3>
+                        <p>Saved models as .pkl files for production</p>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <h3>👨‍💻 Project By: Prem Patil</h3>
+            <p>College Prediction System - AI/ML Project</p>
+            <div class="social-links">
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#">Email</a>
+                <a href="#" target="_blank">Portfolio</a>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.7;">
+                ⭐ Star this project on GitHub if you find it helpful!<br>
+                Made with ❤️ using Python & Machine Learning
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                © 2026 College Prediction System. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
